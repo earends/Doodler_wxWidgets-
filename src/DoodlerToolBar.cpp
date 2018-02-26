@@ -1,11 +1,4 @@
-/***************************************************************
- * Name:      DoodlerMain.cpp
- * Purpose:   Code for Application Frame
- * Author:     ()
- * Created:   2018-02-26
- * Copyright:  ()
- * License:
- **************************************************************/
+#include "DoodlerToolBar.h"
 
 #ifdef WX_PRECOMP
 #include "wx_pch.h"
@@ -15,7 +8,7 @@
 #pragma hdrstop
 #endif //__BORLANDC__
 
-#include "DoodlerMain.h"
+#include "DoodlerToolBar.h"
 
 //helper functions
 enum wxbuildinfoformat {
@@ -51,21 +44,13 @@ BEGIN_EVENT_TABLE(DoodlerDialog, wxDialog)
 
 END_EVENT_TABLE()
 
-DoodlerDialog::DoodlerDialog(wxDialog *dlg, const wxString &title)
-    : wxDialog(dlg, -1, title)
+
+DoodlerToolBar::DoodlerToolBar()
 {
-    this->SetSizeHints(wxDefaultSize, wxDefaultSize);
-
-
+    //ctor
 }
 
-
-DoodlerDialog::~DoodlerDialog()
+DoodlerToolBar::~DoodlerToolBar()
 {
+    //dtor
 }
-
-void DoodlerDialog::OnClose(wxCloseEvent &event)
-{
-    Destroy();
-}
-

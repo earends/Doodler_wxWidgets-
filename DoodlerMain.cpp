@@ -54,6 +54,7 @@ END_EVENT_TABLE()
 DoodlerDialog::DoodlerDialog(wxDialog *dlg, const wxString &title)
     : wxDialog(dlg, -1, title)
 {
+    wxBoxSizer mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizeHints(wxDefaultSize, wxDefaultSize);
 
 

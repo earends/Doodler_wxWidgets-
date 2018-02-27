@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1519682795 source:c:\users\earends\documents\c++\doodler_wxwidgets-\doodlerapp.cpp
+1519752161 source:c:\users\earends\documents\c++\doodler_wxwidgets-\doodlerapp.cpp
 	"wx_pch.h"
 	"DoodlerApp.h"
 	"DoodlerMain.h"
@@ -1690,7 +1690,9 @@
 1517173919 c:\wxwidgets-3.0.3\include\wx\univ\theme.h
 	"wx/string.h"
 
-1519681137 c:\users\earends\documents\c++\doodler_wxwidgets-\doodlermain.h
+1519751601 c:\users\earends\documents\c++\doodler_wxwidgets-\doodlermain.h
+	"DoodlerTool.h"
+	"MyCanvas.h"
 	<wx/wx.h>
 	"DoodlerApp.h"
 	<wx/button.h>
@@ -2983,7 +2985,26 @@
 
 1517173922 c:\wxwidgets-3.0.3\include\wx\msw\rcdefs.h
 
-1519681152 source:c:\users\earends\documents\c++\doodler_wxwidgets-\doodlermain.cpp
+1519753240 source:c:\users\earends\documents\c++\doodler_wxwidgets-\doodlermain.cpp
 	"wx_pch.h"
 	"DoodlerMain.h"
+
+1519749004 c:\users\earends\documents\c++\doodler_wxwidgets-\doodlertool.h
+	<wx/wx.h>
+	<wx/button.h>
+	<wx/statline.h>
+
+1519750686 source:c:\users\earends\documents\c++\doodler_wxwidgets-\doodlertool.cpp
+	"wx_pch.h"
+	"DoodlerTool.h"
+	<sstream>
+
+1519753815 source:c:\users\earends\documents\c++\doodler_wxwidgets-\mycanvas.cpp
+	"wx_pch.h"
+	"MyCanvas.h"
+
+1519753637 c:\users\earends\documents\c++\doodler_wxwidgets-\mycanvas.h
+	<wx/wx.h>
+	<wx/button.h>
+	<wx/statline.h>
 

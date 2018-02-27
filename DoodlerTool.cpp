@@ -18,32 +18,7 @@
 #include "DoodlerTool.h"
 #include <sstream>
 //helper functions
-enum wxbuildinfoformat {
-    short_f, long_f };
 
-wxString wxbuildinfo(wxbuildinfoformat format)
-{
-    wxString wxbuild(wxVERSION_STRING);
-
-    if (format == long_f )
-    {
-#if defined(__WXMSW__)
-        wxbuild << _T("-Windows");
-#elif defined(__WXMAC__)
-        wxbuild << _T("-Mac");
-#elif defined(__UNIX__)
-        wxbuild << _T("-Linux");
-#endif
-
-#if wxUSE_UNICODE
-        wxbuild << _T("-Unicode build");
-#else
-        wxbuild << _T("-ANSI build");
-#endif // wxUSE_UNICODE
-    }
-
-    return wxbuild;
-}
 
 
 BEGIN_EVENT_TABLE(DoodlerTool, wxPanel)
@@ -65,8 +40,56 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     greenLevel = 0;
     addClicked = false;
 
-    mainSizer = new wxBoxSizer(wxVERTICAL);
-    this->SetSizeHints(wxDefaultSize, wxDefaultSize);
+    mainSizer = new wxBoxSizer(wxVERTICAL); // main sizer
+
+    toolSizer = new wxBoxSizer(wxHORIZONTAL); // sizer for tools
+    btnClear = new wxButton(this,idBtnClear,wxT("Clear"),wxDefaultPosition,wxDefaultSize);
+    toolSizer ->Add(btnClear,wxSizerFlags().Expand().Border());
+
+    btnAdd = new wxButton(this,idBtnAdd,wxT("Add"),wxDefaultPosition,wxDefaultSize);
+    toolSizer->Add(btnAdd,wxSizerFlags().Expand().Border());
+
+    wxArrayString shapeChoices;
+    shapeChoices.Add("Shapes");
+    shapeChoices.Add("Rectangle");
+    shapeChoices.Add("Circle");
+    shapeChoices.Add("Line");
+    shapeChoice = new wxChoice(this, wxID_ANY,  wxDefaultPosition, wxDefaultSize, shapeChoices);
+    shapeChoice->SetSelection(0);
+    toolSizer->Add(shapeChoice,wxSizerFlags().Expand().Border());
+    btnLoad = new wxButton(this,idBtnLoad,wxT("Load"),wxDefaultPosition,wxDefaultSize,wxALIGN_RIGHT);
+    toolSizer->Add(btnLoad,wxSizerFlags().Expand().Border());
+
+    btnSave = new wxButton(this,idBtnSave,wxT("Save"),wxDefaultPosition,wxDefaultSize,wxALIGN_RIGHT);
+    toolSizer->Add(btnSave,wxSizerFlags().Expand().Border());
+
+
+    mainSizer->Add(toolSizer,wxSizerFlags().Expand().Border());
+
+    colorSizer = new wxBoxSizer(wxHORIZONTAL);
+     //add coomponents to event sizer
+    redText = new wxStaticText(this,-1,wxT("RED"),wxDefaultPosition,wxDefaultSize);
+    greenText = new wxStaticText(this,-1,wxT("GREEN"),wxDefaultPosition,wxDefaultSize);
+    blueText = new wxStaticText(this,-1,wxT("BLUE"),wxDefaultPosition,wxDefaultSize);
+    redScroll = new wxScrollBar(this,idScrollRed,wxDefaultPosition,wxDefaultSize,wxSB_HORIZONTAL);
+    redScroll->SetScrollbar(0,1,255,1);
+    greenScroll = new wxScrollBar(this,idScrollGreen,wxDefaultPosition,wxDefaultSize,wxSB_HORIZONTAL);
+    greenScroll->SetScrollbar(0,1,255,1);
+    blueScroll = new wxScrollBar(this,idScrollBlue,wxDefaultPosition,wxDefaultSize,wxSB_HORIZONTAL);
+    blueScroll->SetScrollbar(0,1,255,1);
+    //add
+    colorSizer->Add(redText,wxSizerFlags().Expand());
+    colorSizer->Add(redScroll,wxSizerFlags().Expand());
+    colorSizer->Add(greenText,wxSizerFlags().Expand());
+    colorSizer->Add(greenScroll,wxSizerFlags().Expand());
+    colorSizer->Add(blueText,wxSizerFlags().Expand());
+    colorSizer->Add(blueScroll,wxSizerFlags().Expand());
+
+    mainSizer->Add(colorSizer,wxSizerFlags().Expand().Border());
+
+    this->SetSizer(mainSizer);
+
+    mainSizer->Fit(this);
 
 
 }

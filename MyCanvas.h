@@ -24,6 +24,7 @@ class MyCanvas: public wxScrolledWindow
 
 
     private:
+        void OnMotion(wxMouseEvent& event);
         DECLARE_EVENT_TABLE()
 };
 

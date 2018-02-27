@@ -15,44 +15,29 @@
 #pragma hdrstop
 #endif //__BORLANDC__
 
-#include "DoodlerTool.h"
-
-//helper functions
-enum wxbuildinfoformat {
-    short_f, long_f };
-
-wxString wxbuildinfo(wxbuildinfoformat format)
-{
-    wxString wxbuild(wxVERSION_STRING);
-
-    if (format == long_f )
-    {
-#if defined(__WXMSW__)
-        wxbuild << _T("-Windows");
-#elif defined(__WXMAC__)
-        wxbuild << _T("-Mac");
-#elif defined(__UNIX__)
-        wxbuild << _T("-Linux");
-#endif
-
-#if wxUSE_UNICODE
-        wxbuild << _T("-Unicode build");
-#else
-        wxbuild << _T("-ANSI build");
-#endif // wxUSE_UNICODE
-    }
-
-    return wxbuild;
-}
+#include "MyCanvas.h"
 
 
-BEGIN_EVENT_TABLE(DoodlerTool, wxPanel)
+
+
+BEGIN_EVENT_TABLE(MyCanvas, wxScrolledWindow)
+    EVT_MOTION(MyCanvas::OnMotion)
 END_EVENT_TABLE()
 
-DoodlerTool::DoodlerTool(wxWindow *parent)
-    : wxPanel(parent, wxID_ANY)
+MyCanvas::MyCanvas(wxWindow *parent)
+    : wxScrolledWindow(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL | wxNO_FULL_REPAINT_ON_RESIZE)
 {
-    this->SetSizeHints(wxDefaultSize, wxDefaultSize);
-
 
 }
+
+void MyCanvas::OnMotion(wxMouseEvent &event) {
+    if (event.Dragging())
+        {
+            wxClientDC dc(this);
+            wxPen pen(*wxRED,4); // red pen of width 1
+            dc.SetPen(pen);
+            dc.DrawPoint(event.GetPosition());
+            dc.SetPen(wxNullPen);
+        }
+}
+

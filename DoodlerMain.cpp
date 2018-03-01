@@ -59,7 +59,7 @@ DoodlerDialog::DoodlerDialog(wxDialog *dlg, const wxString &title)
     m_tool = new DoodlerTool(this);
     mainSizer->Add(m_tool);
     m_canvas = new MyCanvas(this);
-    m_canvas->SetScrollbars(10,10,100,240);
+    //m_canvas->SetScrollbars(10,10,100,240);
     mainSizer->Add(m_canvas,1,wxGROW,5);
     mainSizer->SetMinSize(wxSize(500,500));
     this->Layout();

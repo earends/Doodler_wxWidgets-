@@ -34,11 +34,7 @@ END_EVENT_TABLE()
 DoodlerTool::DoodlerTool(wxWindow *parent)
     : wxPanel(parent, wxID_ANY)
 {
-    //init values
-    redLevel = 0;
-    blueLevel = 0;
-    greenLevel = 0;
-    addClicked = false;
+
 
     mainSizer = new wxBoxSizer(wxVERTICAL); // main sizer
 
@@ -65,8 +61,14 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
 
 
     mainSizer->Add(toolSizer,wxSizerFlags().Expand().Border());
+    divider1 = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxHORIZONTAL);
+    mainSizer->Add(divider1,wxSizerFlags().Expand().Border());
 
     colorSizer = new wxBoxSizer(wxHORIZONTAL);
+    //init dividers
+    d3 = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxVERTICAL);
+    d4 = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxVERTICAL);
+    d5 = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxVERTICAL);
      //add coomponents to event sizer
     redText = new wxStaticText(this,-1,wxT("RED"),wxDefaultPosition,wxDefaultSize);
     greenText = new wxStaticText(this,-1,wxT("GREEN"),wxDefaultPosition,wxDefaultSize);
@@ -79,13 +81,18 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     blueScroll->SetScrollbar(0,1,255,1);
     //add
     colorSizer->Add(redText,wxSizerFlags().Expand());
+    colorSizer->Add(d3,wxSizerFlags().Expand().Border());
     colorSizer->Add(redScroll,wxSizerFlags().Expand());
     colorSizer->Add(greenText,wxSizerFlags().Expand());
+    colorSizer->Add(d4,wxSizerFlags().Expand().Border());
     colorSizer->Add(greenScroll,wxSizerFlags().Expand());
     colorSizer->Add(blueText,wxSizerFlags().Expand());
+    colorSizer->Add(d5,wxSizerFlags().Expand().Border());
     colorSizer->Add(blueScroll,wxSizerFlags().Expand());
 
     mainSizer->Add(colorSizer,wxSizerFlags().Expand().Border());
+    divider2 = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxHORIZONTAL);
+    mainSizer->Add(divider2,wxSizerFlags().Expand().Border());
 
     this->SetSizer(mainSizer);
 
@@ -95,55 +102,55 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
 }
 
 void DoodlerTool::OnScrollRed(wxScrollEvent& event) {
-    /*
+
     redLevel = event.GetPosition();
     std::stringstream ss;
     ss << event.GetPosition();
     std::string str = ss.str();
 
     redText->SetLabel(str);
-    */
+
 }
 
 void DoodlerTool::OnScrollGreen(wxScrollEvent& event) {
-    /*
+
     greenLevel = event.GetPosition();
     std::stringstream ss;
     ss << event.GetPosition();
     std::string str = ss.str();
 
     greenText->SetLabel(str);
-    */
+
 }
 
 void DoodlerTool::OnScrollBlue(wxScrollEvent& event) {
-    /*
+
     blueLevel = event.GetPosition();
     std::stringstream ss;
     ss << event.GetPosition();
     std::string str = ss.str();
 
     blueText->SetLabel(str);
-    */
+
 }
 
 void DoodlerTool::OnClear(wxCommandEvent& event) {
-    /*
+
     wxClientDC dc(this);
     dc.Clear();
-    */
+
 }
 
 void DoodlerTool::OnAdd(wxCommandEvent& event) {
-    /*
+
     if (addClicked) {
         addClicked = false;
-        addBtn->SetLabel(wxT("Add"));
+        btnAdd->SetLabel(wxT("Add"));
     } else {
         addClicked = true;
-        addBtn->SetLabel(wxT("~Add"));
+        btnAdd->SetLabel(wxT("~Add"));
     }
-    */
+
 
 }
 
@@ -169,4 +176,9 @@ void DoodlerTool::OnLoad(wxCommandEvent& event) {
     */
 
 }
+
+int DoodlerTool::getRed() {
+    return redLevel;
+}
+
 

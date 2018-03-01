@@ -3008,3 +3008,46 @@
 	<wx/button.h>
 	<wx/statline.h>
 
+1519752161 source:c:\users\earends\documents\c++\doodler\doodlerapp.cpp
+	"wx_pch.h"
+	"DoodlerApp.h"
+	"DoodlerMain.h"
+
+1519680546 c:\users\earends\documents\c++\doodler\doodlerapp.h
+	<wx/app.h>
+
+1519937288 c:\users\earends\documents\c++\doodler\doodlermain.h
+	"DoodlerTool.h"
+	"MyCanvas.h"
+	<wx/wx.h>
+	"DoodlerApp.h"
+	<wx/button.h>
+	<wx/statline.h>
+
+1519945451 c:\users\earends\documents\c++\doodler\doodlertool.h
+	<wx/wx.h>
+	<wx/button.h>
+	<wx/statline.h>
+
+1519938252 c:\users\earends\documents\c++\doodler\mycanvas.h
+	<wx/wx.h>
+	<wx/button.h>
+	<wx/statline.h>
+
+1519937546 source:c:\users\earends\documents\c++\doodler\doodlermain.cpp
+	"wx_pch.h"
+	"DoodlerMain.h"
+
+1519945535 source:c:\users\earends\documents\c++\doodler\doodlertool.cpp
+	"wx_pch.h"
+	"DoodlerTool.h"
+	<sstream>
+
+1519938509 source:c:\users\earends\documents\c++\doodler\mycanvas.cpp
+	"wx_pch.h"
+	"MyCanvas.h"
+	"DoodlerTool.h"
+
+1446667740 source:c:\users\earends\documents\c++\doodler\resource.rc
+	"wx/msw/wx.rc"
+

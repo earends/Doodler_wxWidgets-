@@ -16,7 +16,7 @@
 #endif //__BORLANDC__
 
 #include "MyCanvas.h"
-
+#include "DoodlerTool.h"
 
 
 
@@ -34,7 +34,9 @@ void MyCanvas::OnMotion(wxMouseEvent &event) {
     if (event.Dragging())
         {
             wxClientDC dc(this);
-            wxPen pen(*wxRED,4); // red pen of width 1
+            DoodlerTool* doodle;
+
+            wxPen pen(wxColor(doodle->getRed(),0,0),4); // red pen of width 1
             dc.SetPen(pen);
             dc.DrawPoint(event.GetPosition());
             dc.SetPen(wxNullPen);

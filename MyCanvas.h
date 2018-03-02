@@ -14,8 +14,10 @@ class MyCanvas: public wxScrolledWindow
 {
     public:
         MyCanvas(wxWindow *parent);
-
-
+        wxCoord startX;
+        wxCoord startY;
+        wxCoord endX;
+        wxCoord endY;
     protected:
         enum
         {
@@ -25,6 +27,9 @@ class MyCanvas: public wxScrolledWindow
 
     private:
         void OnMotion(wxMouseEvent& event);
+        void OnMouseDown(wxMouseEvent& event);
+        void OnMouseUp(wxMouseEvent& event);
+
         DECLARE_EVENT_TABLE()
 };
 

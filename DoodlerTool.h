@@ -15,6 +15,9 @@ class DoodlerTool: public wxPanel
     public:
         DoodlerTool(wxWindow *parent);
         static int redLevel;
+        static int greenLevel;
+        static int blueLevel;
+        static bool addClicked;
     protected:
         enum
         {
@@ -57,10 +60,8 @@ class DoodlerTool: public wxPanel
         wxScrollBar* blueScroll;
 
 
-        int blueLevel;
-        int greenLevel;
 
-        bool addClicked;
+
 
         wxChoice* shapeChoice;
 

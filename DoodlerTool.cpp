@@ -20,6 +20,9 @@
 //helper functions
 
 int DoodlerTool::redLevel = 0;
+int DoodlerTool::greenLevel = 0;
+int DoodlerTool::blueLevel = 0;
+bool DoodlerTool::addClicked = false;
 
 BEGIN_EVENT_TABLE(DoodlerTool, wxPanel)
     EVT_COMMAND_SCROLL(idScrollRed,DoodlerTool::OnScrollRed)
@@ -35,9 +38,7 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     : wxPanel(parent, wxID_ANY)
 {
 
-    greenLevel = 0;
-    blueLevel = 0;
-    addClicked = false;
+
 
     mainSizer = new wxBoxSizer(wxVERTICAL); // main sizer
 

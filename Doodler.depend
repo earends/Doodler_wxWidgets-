@@ -3024,26 +3024,26 @@
 	<wx/button.h>
 	<wx/statline.h>
 
-1519945451 c:\users\earends\documents\c++\doodler\doodlertool.h
+1520024532 c:\users\earends\documents\c++\doodler\doodlertool.h
 	<wx/wx.h>
 	<wx/button.h>
 	<wx/statline.h>
 
-1519938252 c:\users\earends\documents\c++\doodler\mycanvas.h
+1520024696 c:\users\earends\documents\c++\doodler\mycanvas.h
 	<wx/wx.h>
 	<wx/button.h>
 	<wx/statline.h>
 
-1519937546 source:c:\users\earends\documents\c++\doodler\doodlermain.cpp
+1519952484 source:c:\users\earends\documents\c++\doodler\doodlermain.cpp
 	"wx_pch.h"
 	"DoodlerMain.h"
 
-1519945535 source:c:\users\earends\documents\c++\doodler\doodlertool.cpp
+1520024610 source:c:\users\earends\documents\c++\doodler\doodlertool.cpp
 	"wx_pch.h"
 	"DoodlerTool.h"
 	<sstream>
 
-1519938509 source:c:\users\earends\documents\c++\doodler\mycanvas.cpp
+1519953822 source:c:\users\earends\documents\c++\doodler\mycanvas.cpp
 	"wx_pch.h"
 	"MyCanvas.h"
 	"DoodlerTool.h"

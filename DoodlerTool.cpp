@@ -19,7 +19,7 @@
 #include <sstream>
 //helper functions
 
-
+int DoodlerTool::redLevel = 0;
 
 BEGIN_EVENT_TABLE(DoodlerTool, wxPanel)
     EVT_COMMAND_SCROLL(idScrollRed,DoodlerTool::OnScrollRed)
@@ -35,6 +35,9 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     : wxPanel(parent, wxID_ANY)
 {
 
+    greenLevel = 0;
+    blueLevel = 0;
+    addClicked = false;
 
     mainSizer = new wxBoxSizer(wxVERTICAL); // main sizer
 
@@ -103,7 +106,7 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
 
 void DoodlerTool::OnScrollRed(wxScrollEvent& event) {
 
-    redLevel = event.GetPosition();
+    DoodlerTool::redLevel = event.GetPosition();
     std::stringstream ss;
     ss << event.GetPosition();
     std::string str = ss.str();
@@ -177,8 +180,6 @@ void DoodlerTool::OnLoad(wxCommandEvent& event) {
 
 }
 
-int DoodlerTool::getRed() {
-    return redLevel;
-}
+
 
 

@@ -7,6 +7,7 @@
 
 
 
+
 #include <wx/button.h>
 #include <wx/statline.h>
 
@@ -18,6 +19,10 @@ class DoodlerTool: public wxPanel
         static int greenLevel;
         static int blueLevel;
         static bool addClicked;
+        static bool clearClicked;
+        static bool loadClicked;
+        static bool saveClicked;
+        wxChoice* shapeChoice;
     protected:
         enum
         {
@@ -63,7 +68,6 @@ class DoodlerTool: public wxPanel
 
 
 
-        wxChoice* shapeChoice;
 
 
     private:

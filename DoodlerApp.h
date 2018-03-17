@@ -2,7 +2,7 @@
  * Name:      DoodlerApp.h
  * Purpose:   Defines Application Class
  * Author:     ()
- * Created:   2018-02-26
+ * Created:   2018-03-02
  * Copyright:  ()
  * License:
  **************************************************************/

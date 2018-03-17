@@ -2,7 +2,7 @@
  * Name:      DoodlerMain.cpp
  * Purpose:   Code for Application Frame
  * Author:     ()
- * Created:   2018-02-26
+ * Created:   2018-03-02
  * Copyright:  ()
  * License:
  **************************************************************/
@@ -16,7 +16,6 @@
 #endif //__BORLANDC__
 
 #include "DoodlerMain.h"
-
 
 //helper functions
 enum wxbuildinfoformat {
@@ -61,10 +60,11 @@ DoodlerDialog::DoodlerDialog(wxDialog *dlg, const wxString &title)
     m_canvas = new MyCanvas(this);
     mainSizer->Add(m_canvas,1,wxGROW,5);
     mainSizer->SetMinSize(wxSize(500,500));
+    m_canvas ->SetTool(m_tool);
+    m_canvas->SetBackgroundColour(wxColor(255,255,255));
     this->Layout();
     this->SetSizer(mainSizer);
     mainSizer->Fit(this);
-
 }
 
 

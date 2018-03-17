@@ -2,7 +2,7 @@
  * Name:      DoodlerApp.cpp
  * Purpose:   Code for Application Class
  * Author:     ()
- * Created:   2018-02-26
+ * Created:   2018-03-02
  * Copyright:  ()
  * License:
  **************************************************************/
@@ -22,8 +22,8 @@ IMPLEMENT_APP(DoodlerApp);
 
 bool DoodlerApp::OnInit()
 {
-
-    DoodlerDialog* dlg = new DoodlerDialog(0L, _("Evan's Doodler"));
+    
+    DoodlerDialog* dlg = new DoodlerDialog(0L, _("wxWidgets Application Template"));
     dlg->SetIcon(wxICON(aaaa)); // To Set App Icon
     dlg->Show();
     return true;

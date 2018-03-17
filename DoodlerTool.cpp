@@ -23,6 +23,9 @@ int DoodlerTool::redLevel = 0;
 int DoodlerTool::greenLevel = 0;
 int DoodlerTool::blueLevel = 0;
 bool DoodlerTool::addClicked = false;
+bool DoodlerTool::clearClicked = false;
+bool DoodlerTool::saveClicked = false;
+bool DoodlerTool::loadClicked = false;
 
 BEGIN_EVENT_TABLE(DoodlerTool, wxPanel)
     EVT_COMMAND_SCROLL(idScrollRed,DoodlerTool::OnScrollRed)
@@ -54,6 +57,10 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     shapeChoices.Add("Rectangle");
     shapeChoices.Add("Circle");
     shapeChoices.Add("Line");
+    shapeChoices.Add("Gray Scale");
+    shapeChoices.Add(("Negative"));
+    shapeChoices.Add("Random");
+    shapeChoices.Add("Eraser");
     shapeChoice = new wxChoice(this, wxID_ANY,  wxDefaultPosition, wxDefaultSize, shapeChoices);
     shapeChoice->SetSelection(0);
     toolSizer->Add(shapeChoice,wxSizerFlags().Expand().Border());
@@ -139,14 +146,14 @@ void DoodlerTool::OnScrollBlue(wxScrollEvent& event) {
 }
 
 void DoodlerTool::OnClear(wxCommandEvent& event) {
+    wxMessageBox(wxT("Enter the Draw Area"));
+    clearClicked = true;
 
-    wxClientDC dc(this);
-    dc.Clear();
 
 }
 
 void DoodlerTool::OnAdd(wxCommandEvent& event) {
-
+    wxMessageBox(wxT("Enter the Draw Area"));
     if (addClicked) {
         addClicked = false;
         btnAdd->SetLabel(wxT("Add"));
@@ -159,26 +166,13 @@ void DoodlerTool::OnAdd(wxCommandEvent& event) {
 }
 
 void DoodlerTool::OnSave(wxCommandEvent& event) {
-    /*
-    wxBitmap bitmap(600, 500);
-    wxClientDC dc(this);
-    wxMemoryDC memDC;
-    memDC.SelectObject(bitmap);
-    memDC.Blit(0, 0, 600, 500, & dc, 0, 0);
-    memDC.SelectObject(wxNullBitmap);
-    bmap = bitmap;
-    wxInitAllImageHandlers();
-    bmap.ConvertToImage().SaveFile("test.jpeg",wxBITMAP_TYPE_JPEG);
-    */
+    wxMessageBox(wxT("Enter the Draw Area"));
+    saveClicked = true;
 }
 
 void DoodlerTool::OnLoad(wxCommandEvent& event) {
-    /*
-    wxClientDC dc(this);
-    dc.DrawBitmap(bmap,wxPoint(0,0),true);
-    //heigh is 500 width is 600
-    */
-
+    wxMessageBox(wxT("Enter the Draw Area"));
+    loadClicked = true;
 }
 
 

@@ -14,15 +14,15 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add directory="C:/wxWidgets-3.0.3/lib/gcc_dll/mswu" />
+					<Add directory="C:/Users/Evan/Desktop/wxWidgets/lib/gcc_dll/mswu" />
 				</Compiler>
 				<ResourceCompiler>
-					<Add directory="C:/wxWidgets-3.0.3/lib/gcc_dll/mswu" />
+					<Add directory="C:/Users/Evan/Desktop/wxWidgets/lib/gcc_dll/mswu" />
 				</ResourceCompiler>
 				<Linker>
 					<Add option="-s" />
 					<Add library="libwxmsw30u.a" />
-					<Add directory="C:/wxWidgets-3.0.3/lib/gcc_dll" />
+					<Add directory="C:/Users/Evan/Desktop/wxWidgets/lib/gcc_dll" />
 				</Linker>
 			</Target>
 		</Build>
@@ -34,10 +34,10 @@
 			<Add option="-DWXUSINGDLL" />
 			<Add option="-DwxUSE_UNICODE" />
 			<Add option="-Wall" />
-			<Add directory="C:/wxWidgets-3.0.3/include" />
+			<Add directory="C:/Users/Evan/Desktop/wxWidgets/include" />
 		</Compiler>
 		<ResourceCompiler>
-			<Add directory="C:/wxWidgets-3.0.3/include" />
+			<Add directory="C:/Users/Evan/Desktop/wxWidgets/include" />
 		</ResourceCompiler>
 		<Linker>
 			<Add option="-mthreads" />

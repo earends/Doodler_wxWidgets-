@@ -5,8 +5,7 @@
     #include <wx/wx.h>
 #endif
 
-
-
+#include "DoodlerTool.h"
 #include <wx/button.h>
 #include <wx/statline.h>
 
@@ -18,17 +17,27 @@ class MyCanvas: public wxScrolledWindow
         wxCoord startY;
         wxCoord endX;
         wxCoord endY;
+        void SetTool(DoodlerTool* tool);
     protected:
         enum
         {
 
         };
 
-
+        DoodlerTool* m_tool;
+        wxBitmap b_map;
+        bool eraser;
+        bool square;
+        int countMotion;
     private:
         void OnMotion(wxMouseEvent& event);
         void OnMouseDown(wxMouseEvent& event);
         void OnMouseUp(wxMouseEvent& event);
+        void OnEnter(wxMouseEvent& event);
+        void OnLeave(wxMouseEvent& event);
+        wxBitmap convertToGray(wxBitmap bmap);
+        wxBitmap convertToNegative(wxBitmap bmap);
+        wxBitmap convertToRandom(wxBitmap bmap);
 
         DECLARE_EVENT_TABLE()
 };

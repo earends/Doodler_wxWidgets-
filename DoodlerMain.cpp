@@ -58,6 +58,7 @@ DoodlerDialog::DoodlerDialog(wxDialog *dlg, const wxString &title)
     m_tool = new DoodlerTool(this);
     mainSizer->Add(m_tool);
     m_canvas = new MyCanvas(this);
+    m_tool->SetCanvas(m_canvas);
     mainSizer->Add(m_canvas,1,wxGROW,5);
     mainSizer->SetMinSize(wxSize(500,500));
     m_canvas ->SetTool(m_tool);

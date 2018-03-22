@@ -14,8 +14,10 @@
 #ifdef __BORLANDC__
 #pragma hdrstop
 #endif //__BORLANDC__
-
+#include "wx/filedlg.h"
+#include <wx/wfstream.h>
 #include "DoodlerTool.h"
+#include "MyCanvas.h"
 #include <sstream>
 //helper functions
 
@@ -26,6 +28,7 @@ bool DoodlerTool::addClicked = false;
 bool DoodlerTool::clearClicked = false;
 bool DoodlerTool::saveClicked = false;
 bool DoodlerTool::loadClicked = false;
+class MyCanvas;
 
 BEGIN_EVENT_TABLE(DoodlerTool, wxPanel)
     EVT_COMMAND_SCROLL(idScrollRed,DoodlerTool::OnScrollRed)
@@ -61,6 +64,8 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     shapeChoices.Add(("Negative"));
     shapeChoices.Add("Random");
     shapeChoices.Add("Eraser");
+    shapeChoices.Add("Bits");
+    shapeChoices.Add(("Paint"));
     shapeChoice = new wxChoice(this, wxID_ANY,  wxDefaultPosition, wxDefaultSize, shapeChoices);
     shapeChoice->SetSelection(0);
     toolSizer->Add(shapeChoice,wxSizerFlags().Expand().Border());
@@ -100,6 +105,7 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     colorSizer->Add(blueText,wxSizerFlags().Expand());
     colorSizer->Add(d5,wxSizerFlags().Expand().Border());
     colorSizer->Add(blueScroll,wxSizerFlags().Expand());
+
 
     mainSizer->Add(colorSizer,wxSizerFlags().Expand().Border());
     divider2 = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxHORIZONTAL);
@@ -146,8 +152,10 @@ void DoodlerTool::OnScrollBlue(wxScrollEvent& event) {
 }
 
 void DoodlerTool::OnClear(wxCommandEvent& event) {
-    wxMessageBox(wxT("Enter the Draw Area"));
-    clearClicked = true;
+    //wxMessageBox(wxT("Enter the Draw Area"));
+    //clearClicked = true;
+    wxClientDC dc(m_canvas);
+    dc.Clear();
 
 
 }
@@ -166,15 +174,45 @@ void DoodlerTool::OnAdd(wxCommandEvent& event) {
 }
 
 void DoodlerTool::OnSave(wxCommandEvent& event) {
-    wxMessageBox(wxT("Enter the Draw Area"));
+     wxFileDialog saveFileDialog(this, _("Save BMP file"), "", "","BMP files (*.bmp)|*.bmp", wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
+    if (saveFileDialog.ShowModal() == wxID_CANCEL)
+        return;     // the user changed idea...
+
+    // save the current contents in the file;
+    // this can be done with e.g. wxWidgets output streams:
+    wxFileOutputStream output_stream(saveFileDialog.GetPath());
+    imgSavePath = saveFileDialog.GetPath();
+    if (!output_stream.IsOk())
+    {
+        wxLogError("Cannot save current contents in file '%s'.", saveFileDialog.GetPath());
+        return;
+    }
     saveClicked = true;
 }
 
 void DoodlerTool::OnLoad(wxCommandEvent& event) {
+
+    wxString caption = wxT("Choose a file");
+    wxString wildcard = wxT("BMP files (*.bmp)|*.bmp|GIF files (*.gif)|*.gif");
+    wxString defaultDir = wxT("c:\\temp");
+    wxString defaultFilename = wxEmptyString;
+    wxString path;
+    wxFileDialog dialog(this, caption, defaultDir, defaultFilename,wildcard);
+    if (dialog.ShowModal() == wxID_OK)
+    {
+    path = dialog.GetPath();
+    int filterIndex = dialog.GetFilterIndex();
+    }
     wxMessageBox(wxT("Enter the Draw Area"));
+    imgLoadPath = path;
     loadClicked = true;
 }
 
+
+
+void DoodlerTool::SetCanvas(MyCanvas* canvas) {
+    m_canvas = canvas;
+}
 
 
 

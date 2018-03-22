@@ -5,10 +5,10 @@
     #include <wx/wx.h>
 #endif
 
-#include "DoodlerTool.h"
+
 #include <wx/button.h>
 #include <wx/statline.h>
-
+class DoodlerTool;
 class MyCanvas: public wxScrolledWindow
 {
     public:
@@ -18,6 +18,8 @@ class MyCanvas: public wxScrolledWindow
         wxCoord endX;
         wxCoord endY;
         void SetTool(DoodlerTool* tool);
+        void OnClear();
+
     protected:
         enum
         {
@@ -29,12 +31,16 @@ class MyCanvas: public wxScrolledWindow
         bool eraser;
         bool square;
         int countMotion;
+        int pt_x[4];
+        int pt_y[4];
+        int pt_count;
     private:
         void OnMotion(wxMouseEvent& event);
         void OnMouseDown(wxMouseEvent& event);
         void OnMouseUp(wxMouseEvent& event);
         void OnEnter(wxMouseEvent& event);
         void OnLeave(wxMouseEvent& event);
+
         wxBitmap convertToGray(wxBitmap bmap);
         wxBitmap convertToNegative(wxBitmap bmap);
         wxBitmap convertToRandom(wxBitmap bmap);

@@ -16,6 +16,7 @@
 #endif //__BORLANDC__
 
 #include "MyCanvas.h"
+#include "DoodlerTool.h"
 #include "wx/dcbuffer.h"
 #include <sstream>
 #include <math.h>
@@ -34,7 +35,7 @@ MyCanvas::MyCanvas(wxWindow *parent)
     eraser = false;
     square = false;
     countMotion = 0;
-
+    pt_count = 0;
 }
 
 void MyCanvas::OnMotion(wxMouseEvent &event) {
@@ -52,6 +53,7 @@ void MyCanvas::OnMotion(wxMouseEvent &event) {
     if (DoodlerTool::addClicked && eraser ) {
         //wxClientDC dc(this);
         dc.SetBrush(wxColor(255,255,255));
+        dc.SetPen(wxColor(255,255,255));
         dc.DrawCircle(wxPoint(event.GetX(),event.GetY()),wxCoord(4));
     }
 
@@ -67,6 +69,59 @@ void MyCanvas::OnMotion(wxMouseEvent &event) {
 }
 
 void MyCanvas::OnMouseDown(wxMouseEvent& event) {
+    if (m_tool->shapeChoice->GetSelection() == 8) {
+
+        if (pt_count == 3) {
+            wxSize sze = this->GetSize();
+
+            int index_top_left = 0;
+            int index_top_right = 0;
+            int index_bott_left = 0;
+            int index_bott_right = 0;
+            float dist_top_left = sqrt(pt_x[0]^2 + pt_y[0]^2);
+            float dist_top_right = sqrt((sze.x-pt_x[0]^2) + pt_y[0]^2);
+            float dist_bott_left = sqrt(pt_x[0]^2 + (sze.y-pt_y[0]^2));
+            float dist_bott_right = sqrt((sze.x-pt_x[0]^2) + (sze.y-pt_y[0]^2));
+
+            for (int i = 1; i < 4; i ++) {
+                int temp_top_left = sqrt(pt_x[i]^2 + pt_y[i]^2);
+                int temp_top_right = sqrt((sze.x-pt_x[i]^2) + pt_y[i]^2);
+                int temp_bott_left = sqrt(pt_x[i]^2 + (sze.y-pt_y[i]^2));
+                int temp_bott_right = sqrt((sze.x-pt_x[i]^2) + (sze.y-pt_y[i]^2));
+                if (temp_top_left < dist_top_left) {
+                    dist_top_left = temp_top_left;
+                    index_top_left = i;
+                }
+                if (temp_top_right < dist_top_right) {
+                    dist_top_right = temp_top_right;
+                    index_top_right = i;
+                }
+                if (temp_bott_left < dist_bott_left) {
+                    dist_bott_left = temp_bott_left;
+                    index_bott_left = i;
+                }
+                if (temp_bott_right < dist_bott_right) {
+                    dist_bott_right = temp_bott_right;
+                    index_bott_right = i;
+                }
+            }
+
+            int sz_x = pt_x[index_top_right] - pt_x[index_top_left];
+            int sz_y =  pt_y[index_bott_left]-pt_y[index_top_left];
+
+            wxClientDC dc(this);
+            dc.SetBrush(wxColor(DoodlerTool::redLevel,DoodlerTool::greenLevel,DoodlerTool::blueLevel));
+            dc.DrawRectangle(pt_x[index_top_left],pt_y[index_top_left],sz_x,sz_y);
+            pt_count = 0;
+
+        } else {
+
+
+            pt_x[pt_count] = event.GetX();
+            pt_y[pt_count] = event.GetY();
+            pt_count += 1;
+        }
+    }
 
     if (DoodlerTool::addClicked) {
         startX = event.GetX();
@@ -142,6 +197,12 @@ void MyCanvas::OnEnter(wxMouseEvent& event) {
     if (m_tool->shapeChoice->GetSelection() == 7) {
         eraser = true;
     }
+    if (m_tool->shapeChoice->GetSelection() == 9) {
+        dc.SetBrush(wxColor(DoodlerTool::redLevel,DoodlerTool::greenLevel,DoodlerTool::blueLevel));
+        wxSize sze = this->GetSize();
+
+        dc.DrawRectangle(0,0,sze.x,sze.y);
+    }
 
 
     if (DoodlerTool::clearClicked) {
@@ -163,12 +224,12 @@ void MyCanvas::OnEnter(wxMouseEvent& event) {
         memDC.SelectObject(wxNullBitmap);
         b_map = bitmap;
         wxInitAllImageHandlers();
-        b_map.ConvertToImage().SaveFile("test.jpeg",wxBITMAP_TYPE_JPEG);
+        b_map.ConvertToImage().SaveFile(m_tool->imgSavePath,wxBITMAP_TYPE_BMP);
         DoodlerTool::saveClicked = false;
     }
     if (DoodlerTool::loadClicked) {
         //wxClientDC dc(this);
-        dc.DrawBitmap(b_map,wxPoint(0,0),true);
+        dc.DrawBitmap(wxBitmap(m_tool->imgLoadPath, wxBITMAP_TYPE_BMP),wxPoint(0,0),true);
         DoodlerTool::loadClicked = false;
     }
 }
@@ -220,13 +281,17 @@ wxBitmap MyCanvas::convertToRandom(wxBitmap bmap) {
     for (x = 0; x < w; x++)
     {
     long pos = (y * w + x) * 3;
-    r = rand() % 256;
-    g = rand() % 256;
-    b = rand() % 256;
 
     char g = (char) ((r) + (g) + (b));
-    data[pos] = data[pos+1] = data[pos+2] = g;
+    data[pos] = data[pos+(rand() % 10)] = data[pos+(rand() % 10)] = g;
     }
     return wxBitmap(image);
 }
+
+void MyCanvas::OnClear() {
+    wxClientDC dc(this);
+    dc.Clear();
+}
+
+
 

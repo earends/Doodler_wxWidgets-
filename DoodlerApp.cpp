@@ -22,8 +22,8 @@ IMPLEMENT_APP(DoodlerApp);
 
 bool DoodlerApp::OnInit()
 {
-    
-    DoodlerDialog* dlg = new DoodlerDialog(0L, _("wxWidgets Application Template"));
+
+    DoodlerDialog* dlg = new DoodlerDialog(0L, _("Evan's Amazing Doodler"));
     dlg->SetIcon(wxICON(aaaa)); // To Set App Icon
     dlg->Show();
     return true;

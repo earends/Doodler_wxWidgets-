@@ -10,7 +10,7 @@
 
 #include <wx/button.h>
 #include <wx/statline.h>
-
+class MyCanvas;
 class DoodlerTool: public wxPanel
 {
     public:
@@ -23,6 +23,9 @@ class DoodlerTool: public wxPanel
         static bool loadClicked;
         static bool saveClicked;
         wxChoice* shapeChoice;
+        wxString imgLoadPath;
+        wxString imgSavePath;
+        void SetCanvas(MyCanvas* canvas);
     protected:
         enum
         {
@@ -36,7 +39,7 @@ class DoodlerTool: public wxPanel
             idScrollGreen,
 
         };
-
+        MyCanvas* m_canvas;
         //SIZERS
         wxBoxSizer* mainSizer; // overall box
         wxBoxSizer* colorSizer; // rgb scroll bars
@@ -78,6 +81,8 @@ class DoodlerTool: public wxPanel
         void OnAdd(wxCommandEvent& event);
         void OnSave(wxCommandEvent& event);
         void OnLoad(wxCommandEvent& event);
+
+
 
         DECLARE_EVENT_TABLE()
 };

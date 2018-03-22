@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1520031952 source:c:\users\evan\documents\code\doodler\doodlerapp.cpp
+1521486494 source:c:\users\evan\documents\code\doodler\doodlerapp.cpp
 	"wx_pch.h"
 	"DoodlerApp.h"
 	"DoodlerMain.h"
@@ -2935,7 +2935,7 @@
 1519973001 c:\users\evan\desktop\wxwidgets\include\wx\cocoa\mdi.h
 	"wx/frame.h"
 
-1521277070 c:\users\evan\documents\code\doodler\doodlertool.h
+1521751406 c:\users\evan\documents\code\doodler\doodlertool.h
 	<wx/wx.h>
 	<wx/button.h>
 	<wx/statline.h>
@@ -2970,18 +2970,19 @@
 
 1519972993 c:\users\evan\desktop\wxwidgets\include\wx\generic\statline.h
 
-1521277393 c:\users\evan\documents\code\doodler\mycanvas.h
+1521751406 c:\users\evan\documents\code\doodler\mycanvas.h
 	<wx/wx.h>
-	"DoodlerTool.h"
 	<wx/button.h>
 	<wx/statline.h>
 
-1521127461 source:c:\users\evan\documents\code\doodler\doodlertool.cpp
+1521681703 source:c:\users\evan\documents\code\doodler\doodlertool.cpp
 	"wx_pch.h"
+	"wx/filedlg.h"
+	<wx/wfstream.h>
 	"DoodlerTool.h"
 	<sstream>
 
-1521276495 source:c:\users\evan\documents\code\doodler\mycanvas.cpp
+1521681724 source:c:\users\evan\documents\code\doodler\mycanvas.cpp
 	"wx_pch.h"
 	"MyCanvas.h"
 	"wx/dcbuffer.h"
@@ -3008,7 +3009,22 @@
 
 1519973006 c:\users\evan\desktop\wxwidgets\include\wx\msw\rcdefs.h
 
-1521131069 source:c:\users\evan\documents\code\doodler\doodlermain.cpp
+1521684432 source:c:\users\evan\documents\code\doodler\doodlermain.cpp
 	"wx_pch.h"
 	"DoodlerMain.h"
+
+1519972983 c:\users\evan\desktop\wxwidgets\include\wx\wfstream.h
+	"wx/defs.h"
+	"wx/object.h"
+	"wx/string.h"
+	"wx/stream.h"
+	"wx/file.h"
+	"wx/ffile.h"
+
+1519972985 c:\users\evan\desktop\wxwidgets\include\wx\ffile.h
+	"wx/defs.h"
+	"wx/string.h"
+	"wx/filefn.h"
+	"wx/convauto.h"
+	<stdio.h>
 

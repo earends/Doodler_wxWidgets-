@@ -2,7 +2,7 @@
  * Name:      DoodlerMain.cpp
  * Purpose:   Code for Application Frame
  * Author:     ()
- * Created:   2018-03-02
+ * Created:   2018-03-22
  * Copyright:  ()
  * License:
  **************************************************************/
@@ -66,6 +66,7 @@ DoodlerDialog::DoodlerDialog(wxDialog *dlg, const wxString &title)
     this->Layout();
     this->SetSizer(mainSizer);
     mainSizer->Fit(this);
+    wxMessageBox(wxT("WELCOME!!\nStart Drawing\nClick the DropDown Labeled Pen for more options\nThickness is for pen and eraser"));
 }
 
 
@@ -77,4 +78,5 @@ void DoodlerDialog::OnClose(wxCloseEvent &event)
 {
     Destroy();
 }
+
 

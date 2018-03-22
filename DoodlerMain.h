@@ -2,7 +2,7 @@
  * Name:      DoodlerMain.h
  * Purpose:   Defines Application Frame
  * Author:     ()
- * Created:   2018-03-02
+ * Created:   2018-03-22
  * Copyright:  ()
  * License:
  **************************************************************/
@@ -15,11 +15,13 @@
 #endif
 
 #include "DoodlerApp.h"
-#include "DoodlerTool.h"
-#include "MyCanvas.h"
+
 
 #include <wx/button.h>
 #include <wx/statline.h>
+#include "DoodlerTool.h"
+#include "MyCanvas.h"
+
 class DoodlerDialog: public wxDialog
 {
     public:
@@ -31,8 +33,9 @@ class DoodlerDialog: public wxDialog
         {
 
         };
-        DoodlerTool *m_tool;
-        MyCanvas *m_canvas;
+
+        MyCanvas* m_canvas;
+        DoodlerTool* m_tool;
 
     private:
         void OnClose(wxCloseEvent& event);

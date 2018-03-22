@@ -15,21 +15,18 @@ class DoodlerTool: public wxPanel
 {
     public:
         DoodlerTool(wxWindow *parent);
-        static int redLevel;
-        static int greenLevel;
-        static int blueLevel;
-        static bool addClicked;
-        static bool clearClicked;
-        static bool loadClicked;
-        static bool saveClicked;
+        void SetCanvas(MyCanvas* canvas);
         wxChoice* shapeChoice;
+        wxChoice* thickChoice;
         wxString imgLoadPath;
         wxString imgSavePath;
-        void SetCanvas(MyCanvas* canvas);
+        int redLevel;
+        int blueLevel;
+        int greenLevel;
+
     protected:
         enum
         {
-
             idBtnAdd, // switch between pen and stamp
             idBtnClear, // clear screen
             idBtnSave, // save screen button
@@ -37,7 +34,7 @@ class DoodlerTool: public wxPanel
             idScrollRed,
             idScrollBlue,
             idScrollGreen,
-
+            idChoice,
         };
         MyCanvas* m_canvas;
         //SIZERS
@@ -67,28 +64,22 @@ class DoodlerTool: public wxPanel
         wxScrollBar* greenScroll;
         wxScrollBar* blueScroll;
 
-
-
-
-
-
-
     private:
         void OnScrollRed(wxScrollEvent& event);
         void OnScrollGreen(wxScrollEvent& event);
         void OnScrollBlue(wxScrollEvent& event);
         void OnClear(wxCommandEvent& event);
-        void OnAdd(wxCommandEvent& event);
         void OnSave(wxCommandEvent& event);
         void OnLoad(wxCommandEvent& event);
-
-
-
+        void OnSelect(wxCommandEvent& event);
+        void ConvertToGrey();
+        void ConvertToNegative();
+        void ConvertToRandom();
+        void PaintCan();
         DECLARE_EVENT_TABLE()
 };
-
-//int DoodlerTool::redLevel = 0;
 
 
 
 #endif // DOODLERTOOL_H_INCLUDED
+

@@ -23,6 +23,7 @@ class DoodlerTool: public wxPanel
         int redLevel;
         int blueLevel;
         int greenLevel;
+        std::string IntToStr(int num);
 
     protected:
         enum
@@ -60,6 +61,7 @@ class DoodlerTool: public wxPanel
 
 
 
+
         wxScrollBar* redScroll;
         wxScrollBar* greenScroll;
         wxScrollBar* blueScroll;
@@ -76,6 +78,7 @@ class DoodlerTool: public wxPanel
         void ConvertToNegative();
         void ConvertToRandom();
         void PaintCan();
+
         DECLARE_EVENT_TABLE()
 };
 

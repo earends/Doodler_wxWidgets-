@@ -1690,12 +1690,13 @@
 1519973001 c:\users\evan\desktop\wxwidgets\include\wx\univ\theme.h
 	"wx/string.h"
 
-1521752997 c:\users\evan\documents\code\doodler\doodlermain.h
+1522101052 c:\users\evan\documents\code\doodler\doodlermain.h
 	<wx/wx.h>
 	"DoodlerApp.h"
 	<wx/button.h>
 	<wx/statline.h>
 	"DoodlerTool.h"
+	"DoodlerStatus.h"
 	"MyCanvas.h"
 
 1519972989 c:\users\evan\desktop\wxwidgets\include\wx\wx.h
@@ -2965,34 +2966,38 @@
 
 1519972993 c:\users\evan\desktop\wxwidgets\include\wx\generic\statline.h
 
-1521759435 c:\users\evan\documents\code\doodler\doodlertool.h
+1522102961 c:\users\evan\documents\code\doodler\doodlertool.h
 	<wx/wx.h>
 	<wx/button.h>
 	<wx/statline.h>
 
-1521761905 c:\users\evan\documents\code\doodler\mycanvas.h
+1522268801 c:\users\evan\documents\code\doodler\mycanvas.h
 	<wx/wx.h>
 	<wx/button.h>
 	<wx/statline.h>
 	"wx/overlay.h"
 
-1521755910 source:c:\users\evan\documents\code\doodler\doodlermain.cpp
+1522109152 source:c:\users\evan\documents\code\doodler\doodlermain.cpp
 	"wx_pch.h"
+	<sstream>
 	"DoodlerMain.h"
 
-1521763001 source:c:\users\evan\documents\code\doodler\doodlertool.cpp
+1522269379 source:c:\users\evan\documents\code\doodler\doodlertool.cpp
 	"wx_pch.h"
 	"wx/filedlg.h"
 	<wx/wfstream.h>
 	"DoodlerTool.h"
 	"MyCanvas.h"
+	"wx/effects.h"
 	<sstream>
 
-1521763049 source:c:\users\evan\documents\code\doodler\mycanvas.cpp
+1522269660 source:c:\users\evan\documents\code\doodler\mycanvas.cpp
 	"wx_pch.h"
 	"MyCanvas.h"
 	"DoodlerTool.h"
+	"DoodlerStatus.h"
 	"wx/dcbuffer.h"
+	"wx/effects.h"
 	<sstream>
 	<math.h>
 
@@ -3033,4 +3038,76 @@
 
 1519972990 c:\users\evan\desktop\wxwidgets\include\wx\overlay.h
 	"wx/defs.h"
+
+1521751733 source:c:\users\evan\documents\code\doodler_wxwidgets-\doodlerapp.cpp
+	"wx_pch.h"
+	"DoodlerApp.h"
+	"DoodlerMain.h"
+
+1521751596 c:\users\evan\documents\code\doodler_wxwidgets-\doodlerapp.h
+	<wx/app.h>
+
+1521752997 c:\users\evan\documents\code\doodler_wxwidgets-\doodlermain.h
+	<wx/wx.h>
+	"DoodlerApp.h"
+	<wx/button.h>
+	<wx/statline.h>
+	"DoodlerTool.h"
+	"MyCanvas.h"
+
+1521759435 c:\users\evan\documents\code\doodler_wxwidgets-\doodlertool.h
+	<wx/wx.h>
+	<wx/button.h>
+	<wx/statline.h>
+
+1521955669 c:\users\evan\documents\code\doodler_wxwidgets-\mycanvas.h
+	<wx/wx.h>
+	<wx/button.h>
+	<wx/statline.h>
+	"wx/overlay.h"
+
+1521955669 source:c:\users\evan\documents\code\doodler_wxwidgets-\doodlermain.cpp
+	"wx_pch.h"
+	<sstream>
+	"DoodlerMain.h"
+
+1521949873 source:c:\users\evan\documents\code\doodler_wxwidgets-\doodlertool.cpp
+	"wx_pch.h"
+	"wx/filedlg.h"
+	<wx/wfstream.h>
+	"DoodlerTool.h"
+	"MyCanvas.h"
+	<sstream>
+
+1521955433 source:c:\users\evan\documents\code\doodler_wxwidgets-\mycanvas.cpp
+	"wx_pch.h"
+	"MyCanvas.h"
+	"DoodlerTool.h"
+	"wx/dcbuffer.h"
+	<sstream>
+	<math.h>
+
+1446671340 source:c:\users\evan\documents\code\doodler_wxwidgets-\resource.rc
+	"wx/msw/wx.rc"
+
+1519972982 c:\users\evan\desktop\wxwidgets\include\wx\effects.h
+	"wx/object.h"
+	"wx/colour.h"
+	"wx/gdicmn.h"
+	"wx/dc.h"
+
+1522268319 c:\users\evan\documents\code\doodler\doodlerstatus.h
+	<wx/wx.h>
+	<wx/button.h>
+	<wx/statline.h>
+	<sstream>
+
+1522107675 source:c:\users\evan\documents\code\doodler\doodlerstatus.cpp
+	"wx_pch.h"
+	"wx/filedlg.h"
+	<wx/wfstream.h>
+	"DoodlerStatus.h"
+	"MyCanvas.h"
+	"wx/effects.h"
+	<sstream>
 

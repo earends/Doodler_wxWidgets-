@@ -14,7 +14,7 @@
 #ifdef __BORLANDC__
 #pragma hdrstop
 #endif //__BORLANDC__
-
+#include <sstream>
 #include "DoodlerMain.h"
 
 //helper functions
@@ -51,6 +51,11 @@ BEGIN_EVENT_TABLE(DoodlerDialog, wxDialog)
 
 END_EVENT_TABLE()
 
+/**
+constructor:
+initializes toolbar, canvas, and status bar
+sets up pointers to each class
+**/
 DoodlerDialog::DoodlerDialog(wxDialog *dlg, const wxString &title)
     : wxDialog(dlg, -1, title)
 {
@@ -58,15 +63,27 @@ DoodlerDialog::DoodlerDialog(wxDialog *dlg, const wxString &title)
     m_tool = new DoodlerTool(this);
     mainSizer->Add(m_tool);
     m_canvas = new MyCanvas(this);
+
+    m_status = new DoodlerStatus(this);
+    m_status->SetCanvas(m_canvas);
+
+    m_status->SetTool(m_tool);
     m_tool->SetCanvas(m_canvas);
     mainSizer->Add(m_canvas,1,wxGROW,5);
-    mainSizer->SetMinSize(wxSize(500,500));
+    mainSizer->SetMinSize(wxSize(600,600));
     m_canvas ->SetTool(m_tool);
+    m_canvas->SetStatus(m_status);
     m_canvas->SetBackgroundColour(wxColor(255,255,255));
+    mainSizer->Add(m_status);
+
     this->Layout();
     this->SetSizer(mainSizer);
     mainSizer->Fit(this);
     wxMessageBox(wxT("WELCOME!!\nStart Drawing\nClick the DropDown Labeled Pen for more options\nThickness is for pen and eraser"));
+    m_canvas->SetCanX(m_canvas->GetSize().GetX());
+    m_canvas->SetCanY(m_canvas->GetSize().GetY());
+    m_canvas->SetScrollbars(1,1,m_canvas->winX*10,m_canvas->winY*10,0,0);
+
 }
 
 

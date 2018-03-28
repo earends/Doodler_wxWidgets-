@@ -46,6 +46,8 @@
 		<Unit filename="DoodlerApp.h" />
 		<Unit filename="DoodlerMain.cpp" />
 		<Unit filename="DoodlerMain.h" />
+		<Unit filename="DoodlerStatus.cpp" />
+		<Unit filename="DoodlerStatus.h" />
 		<Unit filename="DoodlerTool.cpp" />
 		<Unit filename="DoodlerTool.h" />
 		<Unit filename="MyCanvas.cpp" />

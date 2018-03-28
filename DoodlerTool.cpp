@@ -18,6 +18,7 @@
 #include <wx/wfstream.h>
 #include "DoodlerTool.h"
 #include "MyCanvas.h"
+#include "wx/effects.h"
 #include <sstream>
 //helper functions
 
@@ -37,7 +38,7 @@ END_EVENT_TABLE()
 DoodlerTool::DoodlerTool(wxWindow *parent)
     : wxPanel(parent, wxID_ANY)
 {
-
+    // set rgb colors
     redLevel = 0;
     greenLevel = 0;
     blueLevel = 0;
@@ -45,7 +46,7 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
 
     toolSizer = new wxBoxSizer(wxHORIZONTAL); // sizer for tools
     btnClear = new wxButton(this,idBtnClear,wxT("Clear"),wxDefaultPosition,wxDefaultSize);
-
+    //choices for thickeness of pen / eraser
     wxArrayString thickChoices;
     thickChoices.Add("1");
     thickChoices.Add("2");
@@ -55,7 +56,7 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     thickChoice = new wxChoice(this, wxID_ANY,  wxDefaultPosition, wxDefaultSize, thickChoices);
     thickChoice->SetSelection(0);
     toolSizer->Add(thickChoice,wxSizerFlags().Expand().Border());
-
+    // choices for screen effects
     wxArrayString shapeChoices;
     shapeChoices.Add("Pen");
     shapeChoices.Add("Rectangle");
@@ -116,45 +117,65 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     mainSizer->Fit(this);
 }
 
+/**
+Sets pointer to MyCanvas class
+**/
 void DoodlerTool::SetCanvas(MyCanvas* canvas) {
     m_canvas = canvas;
 }
 
+/**
+clears client area of screen on button push
+**/
 void DoodlerTool::OnClear(wxCommandEvent& event) {
-    wxClientDC dc(m_canvas);
-    dc.Clear();
+    wxClientDC* clientDC = NULL;
+
+    clientDC = new wxClientDC(m_canvas);
+
+
+    clientDC->Clear();
+    if (clientDC)
+        delete clientDC;
+    m_canvas->SaveScreen();
 }
 
+/**
+Change red label to display red color value
+**/
 void DoodlerTool::OnScrollRed(wxScrollEvent& event) {
 
     redLevel = event.GetPosition();
-    std::stringstream ss;
-    ss << event.GetPosition();
-    std::string str = ss.str();
-    redText->SetLabel(str);
+
+    redText->SetLabel(IntToStr(event.GetPosition()));
 
 }
 
+/**
+Change green label to display green color value
+**/
 void DoodlerTool::OnScrollGreen(wxScrollEvent& event) {
 
     greenLevel = event.GetPosition();
-    std::stringstream ss;
-    ss << event.GetPosition();
-    std::string str = ss.str();
-    greenText->SetLabel(str);
+    greenText->SetLabel(IntToStr(event.GetPosition()));
 
 }
 
+/**
+Cahnge blue label to display blue color value
+**/
 void DoodlerTool::OnScrollBlue(wxScrollEvent& event) {
 
     blueLevel = event.GetPosition();
-    std::stringstream ss;
-    ss << event.GetPosition();
-    std::string str = ss.str();
-    blueText->SetLabel(str);
+    blueText->SetLabel(IntToStr(event.GetPosition()));
 
 }
 
+/**
+Opens a open file dialog box
+loads a desired bitmap file from a selected directory
+prints bitmap on screen
+activates on load button push
+**/
 void DoodlerTool::OnLoad(wxCommandEvent& event) {
     wxClientDC dc(m_canvas);
     wxString caption = wxT("Choose a file");
@@ -172,11 +193,19 @@ void DoodlerTool::OnLoad(wxCommandEvent& event) {
         wxMessageBox(wxT("No Path Selected"));
     } else {
         dc.DrawBitmap(wxBitmap(path, wxBITMAP_TYPE_BMP),wxPoint(0,0),true);
+        m_canvas->SaveScreen();
     }
+
 
 
 }
 
+/**
+opens file dialog box
+prompts user to pick a name and a path
+captures contents of client portion of screen
+saves it at desired location and with file name in form of a .bmp
+**/
 void DoodlerTool::OnSave(wxCommandEvent& event) {
         wxClientDC dc(m_canvas);
         wxFileDialog saveFileDialog(this, _("Save BMP file"), "", "","BMP files (*.bmp)|*.bmp", wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
@@ -204,6 +233,9 @@ void DoodlerTool::OnSave(wxCommandEvent& event) {
         bitmap.ConvertToImage().SaveFile(imgSavePath,wxBITMAP_TYPE_BMP);
 }
 
+/**
+Switch case to handle different choice commands for the shapeChoice choices
+**/
 void DoodlerTool::OnSelect(wxCommandEvent& event) {
     switch (event.GetSelection())
     {
@@ -228,15 +260,24 @@ void DoodlerTool::OnSelect(wxCommandEvent& event) {
         default:
             break;
     }
+    m_canvas->SaveScreen();
 }
 
+/**
+Captures contents of screen
+Saves contents into an image file
+manipulates image pixels to reflect
+a gray scale manipulation
+re paints image on screen
+**/
 void DoodlerTool::ConvertToGrey() {
     wxSize sze = m_canvas->GetSize();
     wxBitmap bitmap(sze.x, sze.y);
     wxClientDC dc(m_canvas);
+
     wxMemoryDC memDC;
     memDC.SelectObject(bitmap);
-    memDC.Blit(0, 0, sze.x, sze.y, & dc, 0, 0);
+    memDC.Blit(0,0,582,455,&dc,0,0);
     memDC.SelectObject(wxNullBitmap);
 
     wxImage image = bitmap.ConvertToImage();
@@ -256,14 +297,25 @@ void DoodlerTool::ConvertToGrey() {
     dc.DrawBitmap(wxBitmap(image),wxPoint(0,0),true);
 }
 
+/**
+Captures contents of screen
+Saves contents into an image file
+manipulates image pixels to reflect
+a negative manipulation
+re paints image on screen
+**/
 void DoodlerTool::ConvertToNegative() {
+
+
     wxSize sze = m_canvas->GetSize();
-    wxBitmap bitmap(sze.x, sze.y);
+    wxBitmap bitmap(sze.x-18, sze.y-18);
     wxClientDC dc(m_canvas);
+
     wxMemoryDC memDC;
     memDC.SelectObject(bitmap);
-    memDC.Blit(0, 0, sze.x, sze.y, & dc, 0, 0);
+    memDC.Blit(0,0,582,455,&dc,0,0);
     memDC.SelectObject(wxNullBitmap);
+
 
     wxImage image = bitmap.ConvertToImage();
     int w = image.GetWidth(), h = image.GetHeight();
@@ -273,19 +325,27 @@ void DoodlerTool::ConvertToNegative() {
     for (x = 0; x < w; x++)
     {
     long pos = (y * w + x) * 3;
-    char g = (char) ((255- data[pos]) + (255 - data[pos+1]) + (255-data[pos+2]));
-    data[pos] = data[pos+1] = data[pos+2] = g;
+    //char g = (char) (0) + (0) + (0);
+    data[pos] = 255 - data[pos];
+    data[pos+1] = 255 -data[pos + 1];
+    data[pos+2] = 255 - data[pos + 2];
     }
     dc.DrawBitmap(wxBitmap(image),wxPoint(0,0),true);
 }
 
+/**
+Captures contents of screen
+Saves contents into an image file
+manipulates image pixels to reflect
+a 1-10 random change in r,g,b value
+**/
 void DoodlerTool::ConvertToRandom() {
     wxSize sze = m_canvas->GetSize();
     wxBitmap bitmap(sze.x, sze.y);
     wxClientDC dc(m_canvas);
     wxMemoryDC memDC;
     memDC.SelectObject(bitmap);
-    memDC.Blit(0, 0, sze.x, sze.y, & dc, 0, 0);
+    memDC.Blit(0,0,582,455,&dc,0,0);
     memDC.SelectObject(wxNullBitmap);
 
     wxImage image = bitmap.ConvertToImage();
@@ -303,9 +363,26 @@ void DoodlerTool::ConvertToRandom() {
     dc.DrawBitmap(wxBitmap(image),wxPoint(0,0),true);
 }
 
+/**
+Paints a square over client portion of screen
+with color based on RGB meter
+**/
 void DoodlerTool::PaintCan() {
     wxClientDC dc(m_canvas);
+    PrepareDC(dc);
     dc.SetBrush(wxColor(redLevel,greenLevel,blueLevel));
+    dc.SetPen(*wxTRANSPARENT_PEN);
     wxSize sze = m_canvas->GetSize();
-    dc.DrawRectangle(0,0,sze.x,sze.y);
+    dc.DrawRectangle(0,0,sze.GetX(),sze.GetY());
+}
+
+
+/**
+Helper Function
+**/
+std::string DoodlerTool::IntToStr(int num) {
+    std::stringstream ss;
+    ss << num;
+    std::string str = ss.str();
+    return str;
 }

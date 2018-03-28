@@ -10,12 +10,21 @@
 #include <wx/statline.h>
 #include "wx/overlay.h"
 class DoodlerTool;
+class DoodlerStatus;
 class MyCanvas: public wxScrolledWindow
 {
     public:
         MyCanvas(wxWindow *parent);
         void SetTool(DoodlerTool* tool);
+        void SetStatus(DoodlerStatus* status);
+        void SetCanX(int x) {winX = x;}; // set window size var
+        void SetCanY(int y) {winY = y;}; // set window size var
 
+
+        int winX; //600
+        int winY; //473
+        void SaveScreen();
+        wxBitmap *b_map;
 
     protected:
         enum
@@ -23,9 +32,12 @@ class MyCanvas: public wxScrolledWindow
 
         };
         DoodlerTool* m_tool;
-        int startX;
-        int startY;
-        wxOverlay m_overlay;
+        DoodlerStatus* m_status;
+        int startX; // start of mouse drag y
+        int startY; // start of mouse drag y
+        wxOverlay m_overlay; // allows square outline
+
+
 
     private:
         void OnPaint(wxPaintEvent& event);
@@ -34,9 +46,11 @@ class MyCanvas: public wxScrolledWindow
         void DrawEraser(wxMouseEvent& event);
         void OnMouseUp(wxMouseEvent& event);
         void OnMouseDown(wxMouseEvent& event);
-        void DrawRectangle();
-        void DrawCircle();
-        void DrawLine();
+        void OnDraw(wxDC& dc);
+        void OnScroll(wxScrollWinEvent& event);
+
+
+
         DECLARE_EVENT_TABLE()
 };
 

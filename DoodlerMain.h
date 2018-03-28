@@ -20,6 +20,7 @@
 #include <wx/button.h>
 #include <wx/statline.h>
 #include "DoodlerTool.h"
+#include "DoodlerStatus.h"
 #include "MyCanvas.h"
 
 class DoodlerDialog: public wxDialog
@@ -36,7 +37,7 @@ class DoodlerDialog: public wxDialog
 
         MyCanvas* m_canvas;
         DoodlerTool* m_tool;
-
+        DoodlerStatus* m_status;
     private:
         void OnClose(wxCloseEvent& event);
 

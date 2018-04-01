@@ -29,7 +29,9 @@ class DoodlerDialog: public wxDialog
         DoodlerDialog(wxDialog *dlg, const wxString& title);
         ~DoodlerDialog();
 
+    // DS: Should these be private or protected?
     protected:
+        // DS: You don't need this empty enum
         enum
         {
 

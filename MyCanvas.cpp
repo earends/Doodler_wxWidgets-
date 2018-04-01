@@ -35,6 +35,7 @@ END_EVENT_TABLE()
 MyCanvas::MyCanvas(wxWindow *parent)
     : wxScrolledWindow(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL | wxNO_FULL_REPAINT_ON_RESIZE)
 {
+    // DS: Magic numbers like this are a significant code smell.
     b_map =  new wxBitmap(600*10,473*10);
     wxMemoryDC memDC;
     memDC.SelectObject(*b_map);
@@ -64,6 +65,10 @@ void MyCanvas::OnMotion(wxMouseEvent& event) {
     m_status->m_y->SetLabel(m_tool->IntToStr(event.GetY()));
 
     int s = m_tool->shapeChoice->GetSelection();
+    // DS: This makes me nervous.  Instead, I'd suggest using an enum to
+    // represent what the different tools types are.  Esepcially with C++11
+    // scoped enums, they are far safer than magic int values.
+
     //based on DoodlerTool shapechoice - window screen effects
     if (event.Dragging() && s == 0) { // draw pen
         DrawPen(event);
@@ -110,6 +115,8 @@ Does drawing to reflect that of a pen dragged over a peice of paper
 Draws an actual wxPen if the thickenss is a 1
 Then enlarged circles based on thickness user has desired
 **/
+// DS: May want to change this to drawing connected lines (or drawing
+// shapes close enough together to look continuous)
 void MyCanvas::DrawPen(wxMouseEvent& event) {
         wxClientDC dc(this);
         wxColor color = wxColor(m_tool->redLevel,m_tool->greenLevel,m_tool->blueLevel);
@@ -197,7 +204,8 @@ void MyCanvas::OnMouseDown(wxMouseEvent& event) {
 If initial bitmap is loaded draw it on screen
 **/
 void MyCanvas::OnDraw(wxDC& dc) {
-
+    // DS: I know the message box was probably for testing, but they are
+    // incredibly annoying from a users' perspective.
     wxMessageBox(wxT("hello"));
     PrepareDC(dc);
     dc.DrawBitmap(*b_map, 0, 0, false);
@@ -221,6 +229,7 @@ void MyCanvas::SaveScreen() {
         wxClientDC dc(this);
         memDC.SelectObject(*b_map);
         ///1st num, x,y on bitmap, last two x,y on dc
+        // DS: Why minus 18?  Magic numbers should scare you.
         memDC.Blit(GetScrollPos(wxHORIZONTAL),GetScrollPos(wxVERTICAL),winX-18,winY-18,&dc,0,0);
         memDC.SelectObject(wxNullBitmap);
         wxInitAllImageHandlers();

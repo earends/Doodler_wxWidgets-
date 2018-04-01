@@ -16,6 +16,10 @@ class DoodlerTool: public wxPanel
     public:
         DoodlerTool(wxWindow *parent);
         void SetCanvas(MyCanvas* canvas);
+
+        // DS: Any time you have a public variable, you are telling users
+        // of your class that they should feel free to change the variables
+        // as much as they want.
         wxChoice* shapeChoice;
         wxChoice* thickChoice;
         wxString imgLoadPath;
@@ -23,6 +27,12 @@ class DoodlerTool: public wxPanel
         int redLevel;
         int blueLevel;
         int greenLevel;
+
+        // DS: Functions like this shouldn't be part of any specific class,
+        // especially if you have multiple places where you have the same
+        // function implemented.  I usually have functions like this in a
+        // header/cpp file named common.cpp and common.h, and I don't have
+        // them as part of a class because it really doesn't make sense
         std::string IntToStr(int num);
 
     protected:
@@ -37,6 +47,8 @@ class DoodlerTool: public wxPanel
             idScrollGreen,
             idChoice,
         };
+
+        // DS: Are you using the m_ convention for local variables or not?
         MyCanvas* m_canvas;
         //SIZERS
         wxBoxSizer* mainSizer; // overall box

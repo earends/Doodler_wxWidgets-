@@ -25,17 +25,26 @@ class DoodlerStatus: public wxPanel
         {
 
         };
+
+        // DS: Does the status bar need pointers to the tool and canvas?
+        // In other words, will the toolbar ever be responsible for
+        // updating information in either the tool or the canvas?
         DoodlerTool* m_tool;
         MyCanvas* m_canvas;
 
         wxStaticText* m_x_text; //
 
         wxStaticText* m_y_text;
+
+        // DS: Not a great variable name.  You seem to be using the m_
+        // convention for class members, so it would at least make sense
+        // to follow that.
         wxStaticLine *l;
 
 
 
     private:
+        // DS: Why are you taking 'num' by pointer instead of by value?
         std::string IntToStr(int *num);
         DECLARE_EVENT_TABLE()
 };

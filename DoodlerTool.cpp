@@ -87,6 +87,7 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     d4 = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxVERTICAL);
     d5 = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxVERTICAL);
      //add coomponents to event sizer
+     // DS: Why are these labels in caps?
     redText = new wxStaticText(this,-1,wxT("RED"),wxDefaultPosition,wxDefaultSize);
     greenText = new wxStaticText(this,-1,wxT("GREEN"),wxDefaultPosition,wxDefaultSize);
     blueText = new wxStaticText(this,-1,wxT("BLUE"),wxDefaultPosition,wxDefaultSize);

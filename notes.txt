@@ -1,0 +1,10 @@
+Overall, good work.  I've added comments to various places in the code that start "DS" so they should be easy to search for.
+
+
+In general, you'll want a .gitignore to ignore build system artifacts (your bin and obj folders, for example)
+
+You should consider pulling out a class named something like "DrawingState" which could encapsulate things like the current color, current tool, and such.  This would help break the coupling between DoodlerTool and MyCanvas since they would both only need to interact with the DrawingState.  It also would help make your design more "MVC-esque" where generally you don't want a class that is concerned with what's drawn to the screen ("View") also concerned by the application's state ("Model").
+
+Your classes really should have destructors, even if they will only be called at the end of the program.
+
+I would also suggest looking at how you can structure your code so that your image doesn't have to be an integer multiple of the window size.  Ideally, you should be able to scroll down to the pixel level and not as a sort of "paging" system.

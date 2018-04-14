@@ -19,6 +19,7 @@
 #include "DoodlerTool.h"
 #include "MyCanvas.h"
 #include "wx/effects.h"
+#include "Common.h"
 #include <sstream>
 //helper functions
 
@@ -87,9 +88,9 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     d4 = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxVERTICAL);
     d5 = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxVERTICAL);
      //add coomponents to event sizer
-    redText = new wxStaticText(this,-1,wxT("RED"),wxDefaultPosition,wxDefaultSize);
-    greenText = new wxStaticText(this,-1,wxT("GREEN"),wxDefaultPosition,wxDefaultSize);
-    blueText = new wxStaticText(this,-1,wxT("BLUE"),wxDefaultPosition,wxDefaultSize);
+    redText = new wxStaticText(this,-1,wxT("Red"),wxDefaultPosition,wxDefaultSize);
+    greenText = new wxStaticText(this,-1,wxT("Green"),wxDefaultPosition,wxDefaultSize);
+    blueText = new wxStaticText(this,-1,wxT("Blue"),wxDefaultPosition,wxDefaultSize);
     redScroll = new wxScrollBar(this,idScrollRed,wxDefaultPosition,wxDefaultSize,wxSB_HORIZONTAL);
     redScroll->SetScrollbar(0,1,255,1);
     greenScroll = new wxScrollBar(this,idScrollGreen,wxDefaultPosition,wxDefaultSize,wxSB_HORIZONTAL);
@@ -115,6 +116,9 @@ DoodlerTool::DoodlerTool(wxWindow *parent)
     this->SetSizer(mainSizer);
 
     mainSizer->Fit(this);
+}
+
+DoodlerTool::~DoodlerTool() {
 }
 
 /**
@@ -146,7 +150,7 @@ void DoodlerTool::OnScrollRed(wxScrollEvent& event) {
 
     redLevel = event.GetPosition();
 
-    redText->SetLabel(IntToStr(event.GetPosition()));
+    redText->SetLabel(m_common->IntToStr(event.GetPosition()));
 
 }
 
@@ -156,7 +160,7 @@ Change green label to display green color value
 void DoodlerTool::OnScrollGreen(wxScrollEvent& event) {
 
     greenLevel = event.GetPosition();
-    greenText->SetLabel(IntToStr(event.GetPosition()));
+    greenText->SetLabel(m_common->IntToStr(event.GetPosition()));
 
 }
 
@@ -166,7 +170,7 @@ Cahnge blue label to display blue color value
 void DoodlerTool::OnScrollBlue(wxScrollEvent& event) {
 
     blueLevel = event.GetPosition();
-    blueText->SetLabel(IntToStr(event.GetPosition()));
+    blueText->SetLabel(m_common->IntToStr(event.GetPosition()));
 
 }
 
@@ -215,7 +219,7 @@ void DoodlerTool::OnSave(wxCommandEvent& event) {
         // save the current contents in the file;
         // this can be done with e.g. wxWidgets output streams:
         wxFileOutputStream output_stream(saveFileDialog.GetPath());
-        imgSavePath = saveFileDialog.GetPath();
+        //imgSavePath = saveFileDialog.GetPath();
         if (!output_stream.IsOk())
         {
             wxLogError("Cannot save current contents in file '%s'.", saveFileDialog.GetPath());
@@ -230,7 +234,7 @@ void DoodlerTool::OnSave(wxCommandEvent& event) {
         memDC.Blit(0, 0, sze.x, sze.y, & dc, 0, 0);
         memDC.SelectObject(wxNullBitmap);
         wxInitAllImageHandlers();
-        bitmap.ConvertToImage().SaveFile(imgSavePath,wxBITMAP_TYPE_BMP);
+        bitmap.ConvertToImage().SaveFile(saveFileDialog.GetPath(),wxBITMAP_TYPE_BMP);
 }
 
 /**
@@ -377,12 +381,3 @@ void DoodlerTool::PaintCan() {
 }
 
 
-/**
-Helper Function
-**/
-std::string DoodlerTool::IntToStr(int num) {
-    std::stringstream ss;
-    ss << num;
-    std::string str = ss.str();
-    return str;
-}

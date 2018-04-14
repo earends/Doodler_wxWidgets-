@@ -40,35 +40,21 @@ DoodlerStatus::DoodlerStatus(wxWindow *parent)
     m_y_text = new wxStaticText(this,wxID_ANY,wxT("Mouse Y: "));
     m_y = new wxStaticText(this,wxID_ANY,"0",wxDefaultPosition,wxSize(20,20));
 
-    l = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxVERTICAL);
+    m_line = new wxStaticLine(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxVERTICAL);
     mainSizer->Add(m_x_text,wxSizerFlags().Expand().Border());
     mainSizer->Add(m_x,wxSizerFlags().Expand().Border());
-    mainSizer->Add(l,wxSizerFlags().Expand().Border());
+    mainSizer->Add(m_line,wxSizerFlags().Expand().Border());
     mainSizer->Add(m_y_text,wxSizerFlags().Expand().Border());
     mainSizer->Add(m_y,wxSizerFlags().Expand().Border());
     this->SetSizer(mainSizer);
     mainSizer->Fit(this);
 }
 
-/**
-Sets pointer to MyCanvas class
-**/
-void DoodlerStatus::SetCanvas(MyCanvas* canvas) {
-    m_canvas = canvas;
+DoodlerStatus::~DoodlerStatus() {
 
 }
 
-/**
-Sets pointer to DoodlerTool class
-**/
-void DoodlerStatus::SetTool(DoodlerTool* tool) {
-    m_tool = tool;
-}
 
-std::string DoodlerStatus::IntToStr(int *num) {
-    std::stringstream ss;
-    ss << *num;
-    std::string str = ss.str();
-    return str;
-}
+
+
 

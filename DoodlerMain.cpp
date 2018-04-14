@@ -65,9 +65,7 @@ DoodlerDialog::DoodlerDialog(wxDialog *dlg, const wxString &title)
     m_canvas = new MyCanvas(this);
 
     m_status = new DoodlerStatus(this);
-    m_status->SetCanvas(m_canvas);
 
-    m_status->SetTool(m_tool);
     m_tool->SetCanvas(m_canvas);
     mainSizer->Add(m_canvas,1,wxGROW,5);
     mainSizer->SetMinSize(wxSize(600,600));
@@ -82,7 +80,7 @@ DoodlerDialog::DoodlerDialog(wxDialog *dlg, const wxString &title)
     wxMessageBox(wxT("WELCOME!!\nStart Drawing\nClick the DropDown Labeled Pen for more options\nThickness is for pen and eraser"));
     m_canvas->SetCanX(m_canvas->GetSize().GetX());
     m_canvas->SetCanY(m_canvas->GetSize().GetY());
-    m_canvas->SetScrollbars(1,1,m_canvas->winX*10,m_canvas->winY*10,0,0);
+    m_canvas->SetScrollbars(1,1,m_canvas->GetWinBitWidth(),m_canvas->GetWinBitHeight(),0,0);
 
 }
 

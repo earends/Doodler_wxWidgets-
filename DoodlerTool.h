@@ -11,19 +11,20 @@
 #include <wx/button.h>
 #include <wx/statline.h>
 class MyCanvas;
+class Common;
 class DoodlerTool: public wxPanel
 {
     public:
         DoodlerTool(wxWindow *parent);
+        ~DoodlerTool();
         void SetCanvas(MyCanvas* canvas);
-        wxChoice* shapeChoice;
-        wxChoice* thickChoice;
-        wxString imgLoadPath;
-        wxString imgSavePath;
         int redLevel;
         int blueLevel;
         int greenLevel;
-        std::string IntToStr(int num);
+
+        int GetShapeChoice() {return shapeChoice->GetCurrentSelection();};
+        int GetThickChoice() {return thickChoice->GetCurrentSelection();};
+
 
     protected:
         enum
@@ -37,6 +38,7 @@ class DoodlerTool: public wxPanel
             idScrollGreen,
             idChoice,
         };
+        Common *m_common;
         MyCanvas* m_canvas;
         //SIZERS
         wxBoxSizer* mainSizer; // overall box
@@ -78,6 +80,9 @@ class DoodlerTool: public wxPanel
         void ConvertToNegative();
         void ConvertToRandom();
         void PaintCan();
+        wxChoice* shapeChoice;
+        wxChoice* thickChoice;
+
 
         DECLARE_EVENT_TABLE()
 };

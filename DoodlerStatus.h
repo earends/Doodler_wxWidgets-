@@ -16,27 +16,18 @@ class DoodlerStatus: public wxPanel
 {
     public:
         DoodlerStatus(wxWindow *parent);
-        void SetCanvas(MyCanvas* canvas);
-        void SetTool(DoodlerTool* tool);
+        ~DoodlerStatus();
         wxStaticText* m_y; // mouse x value
         wxStaticText* m_x; // mouse y value
     protected:
-        enum
-        {
 
-        };
-        DoodlerTool* m_tool;
-        MyCanvas* m_canvas;
-
-        wxStaticText* m_x_text; //
-
-        wxStaticText* m_y_text;
-        wxStaticLine *l;
 
 
 
     private:
-        std::string IntToStr(int *num);
+        wxStaticText* m_x_text;
+        wxStaticText* m_y_text;
+        wxStaticLine *m_line; // divider line for inbetween canvas-status bar
         DECLARE_EVENT_TABLE()
 };
 

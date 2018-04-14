@@ -30,17 +30,12 @@ class DoodlerDialog: public wxDialog
         ~DoodlerDialog();
 
     protected:
-        enum
-        {
 
-        };
-
+    private:
+        void OnClose(wxCloseEvent& event);
         MyCanvas* m_canvas;
         DoodlerTool* m_tool;
         DoodlerStatus* m_status;
-    private:
-        void OnClose(wxCloseEvent& event);
-
         DECLARE_EVENT_TABLE()
 };
 

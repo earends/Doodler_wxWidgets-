@@ -9,7 +9,7 @@
 
 #ifndef DOODLERAPP_H
 #define DOODLERAPP_H
-
+#define __GXX_ABI_VERSION 1002
 #include <wx/app.h>
 
 class DoodlerApp : public wxApp

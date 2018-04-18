@@ -6,7 +6,7 @@
  * Copyright:  ()
  * License:
  **************************************************************/
-
+#define __GXX_ABI_VERSION 1002
 #ifdef WX_PRECOMP
 #include "wx_pch.h"
 #endif

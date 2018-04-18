@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1521751733 source:c:\users\evan\documents\code\doodler\doodlerapp.cpp
+1523905931 source:c:\users\evan\documents\code\doodler\doodlerapp.cpp
 	"wx_pch.h"
 	"DoodlerApp.h"
 	"DoodlerMain.h"
 
-1521751596 c:\users\evan\documents\code\doodler\doodlerapp.h
+1523905931 c:\users\evan\documents\code\doodler\doodlerapp.h
 	<wx/app.h>
 
 1519972984 c:\users\evan\desktop\wxwidgets\include\wx\app.h
@@ -2966,12 +2966,12 @@
 
 1519972993 c:\users\evan\desktop\wxwidgets\include\wx\generic\statline.h
 
-1523056828 c:\users\evan\documents\code\doodler\doodlertool.h
+1523898109 c:\users\evan\documents\code\doodler\doodlertool.h
 	<wx/wx.h>
 	<wx/button.h>
 	<wx/statline.h>
 
-1523056558 c:\users\evan\documents\code\doodler\mycanvas.h
+1523898109 c:\users\evan\documents\code\doodler\mycanvas.h
 	<wx/wx.h>
 	<wx/button.h>
 	<wx/statline.h>
@@ -2982,7 +2982,7 @@
 	<sstream>
 	"DoodlerMain.h"
 
-1523056828 source:c:\users\evan\documents\code\doodler\doodlertool.cpp
+1523905889 source:c:\users\evan\documents\code\doodler\doodlertool.cpp
 	"wx_pch.h"
 	"wx/filedlg.h"
 	<wx/wfstream.h>
@@ -2992,7 +2992,7 @@
 	"Common.h"
 	<sstream>
 
-1523056632 source:c:\users\evan\documents\code\doodler\mycanvas.cpp
+1523898109 source:c:\users\evan\documents\code\doodler\mycanvas.cpp
 	"wx_pch.h"
 	"MyCanvas.h"
 	"DoodlerTool.h"
@@ -3119,4 +3119,10 @@
 
 1523054588 c:\users\evan\documents\code\doodler\common.h
 	<sstream>
+
+1523897383 source:c:\users\evan\documents\code\doodler\drawingstate.cpp
+	"Common.h"
+	<sstream>
+
+1523897383 c:\users\evan\documents\code\doodler\drawingstate.h
 
